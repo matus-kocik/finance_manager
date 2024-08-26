@@ -1,22 +1,25 @@
 from django.db import models
 
-class Income: # Príjem
+class Income(models.Model): # Príjem
     pass
 
-class IncomeSource: # Zdroj príjmu
+class IncomeCategory(models.Model): # Kategória príjmu
     pass
 
-class Expense: # Výdavok
+class Expense(models.Model): # Výdavok
     pass
 
-class ExpenseCategory: # Kategória výdavku
+class ExpenseCategory(models.Model): # Kategória výdavku
     pass
 
-class Investment: # Investícia
+class FinancialSource(models.Model): # Zdroj
     pass
 
-class Debt: # Dlh
+class Investment(models.Model): # Investícia
     pass
 
-class Claim: # Pohľadávka
+class Debt(models.Model): # Dlh
+    pass
+
+class Claim(models.Model): # Pohľadávka
     pass
