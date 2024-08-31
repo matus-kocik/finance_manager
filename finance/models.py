@@ -210,8 +210,26 @@ class InvestmentPlan(BaseModel):  # Plánovaná investícia
     planned_expense = models.OneToOneField(
         Expense, verbose_name=_("Planned Expense"), on_delete=models.CASCADE
     )
-    planned_investment_date = models.DateField(
-        verbose_name=_("Planned Investment Date"), blank=True, null=True
+    goal = models.DecimalField(
+        verbose_name=_("Investment Goal"),
+        max_digits=12,
+        decimal_places=2,
+        blank=True,
+        default=0,
+    )
+    balance = models.DecimalField(
+        verbose_name=_("Current Balance"),
+        max_digits=12,
+        decimal_places=2,
+        blank=True,
+        default=0,
+    )
+    percent_change = models.DecimalField(
+        verbose_name=_("Percent Change"),
+        max_digits=6,
+        decimal_places=2,
+        blank=True,
+        default=0,
     )
 
 
@@ -219,8 +237,26 @@ class Investment(BaseModel):  # Investícia
     expense = models.OneToOneField(
         Expense, verbose_name=_("Expense"), on_delete=models.CASCADE
     )
-    investment_date = models.DateField(
-        verbose_name=_("Investment Date"), blank=True, null=True
+    goal = models.DecimalField(
+        verbose_name=_("Investment Goal"),
+        max_digits=12,
+        decimal_places=2,
+        blank=True,
+        default=0,
+    )
+    balance = models.DecimalField(
+        verbose_name=_("Current Balance"),
+        max_digits=12,
+        decimal_places=2,
+        blank=True,
+        default=0,
+    )
+    percent_change = models.DecimalField(
+        verbose_name=_("Percent Change"),
+        max_digits=6,
+        decimal_places=2,
+        blank=True,
+        default=0,
     )
 
 
