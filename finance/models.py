@@ -42,6 +42,7 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ["-created_at"]
 
     def save(self, *args, **kwargs):
         if not self.slug:
