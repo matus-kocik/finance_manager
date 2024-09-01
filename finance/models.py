@@ -208,7 +208,7 @@ class Expense(BaseModel):  # Výdavok
 
 class InvestmentPlan(BaseModel):  # Plánovaná investícia
     planned_expense = models.OneToOneField(
-        Expense, verbose_name=_("Planned Expense"), on_delete=models.CASCADE
+        ExpensePlan, verbose_name=_("Planned Expense"), on_delete=models.CASCADE
     )
     goal = models.DecimalField(
         verbose_name=_("Investment Goal"),
