@@ -92,7 +92,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/", TokenObtainPairView.as_view(), name="get_token"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/users/", UserListView.as_view(), name="user-list"),
     path("api/users/create/", UserCreateView.as_view(), name="user-create"),
