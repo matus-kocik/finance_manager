@@ -97,15 +97,8 @@ WSGI_APPLICATION = "finance_manager.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DBNAME"),
-        "USER": config("DBUSER"),
-        "PASSWORD": config("DBPASSWORD"),
-        "HOST": config("DBHOST"),
-        "PORT": config("DBPORT", 5432),
-        "OPTIONS": {
-            "sslmode": "require",
-        },
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
