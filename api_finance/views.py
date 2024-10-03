@@ -6,6 +6,21 @@ from finance.models import *
 from .serializers import *
 
 
+class BaseListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
+
+class BaseCreateAPIView(generics.CreateAPIView):
+    permission_classes = [IsAuthenticated]
+
+
+class BaseRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, IsOwner]
+
+
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -18,62 +33,28 @@ class UserCreateView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
 
-class UserDetailView(generics.RetrieveAPIView):
+class UserDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsOwner]
 
 
-class UserUpdateView(generics.UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class UserDeleteView(generics.DestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class TagListView(generics.ListAPIView):
+class TagListView(BaseListAPIView):
     serializer_class = TagSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class TagCreateView(generics.CreateAPIView):
+class TagCreateView(BaseCreateAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class TagDetailView(generics.RetrieveAPIView):
+class TagDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class TagUpdateView(generics.UpdateAPIView):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class TagDeleteView(generics.DestroyAPIView):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class IncomeCategoryListView(generics.ListAPIView):
+class IncomeCategoryListView(BaseListAPIView):
     serializer_class = IncomeCategorySerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
 class IncomeCategoryCreateView(generics.CreateAPIView):
@@ -82,467 +63,202 @@ class IncomeCategoryCreateView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
 
-class IncomeCategoryDetailView(generics.RetrieveAPIView):
+class IncomeCategoryDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = IncomeCategory.objects.all()
     serializer_class = IncomeCategorySerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class IncomeCategoryUpdateView(generics.UpdateAPIView):
-    queryset = IncomeCategory.objects.all()
-    serializer_class = IncomeCategorySerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class IncomeCategoryDeleteView(generics.DestroyAPIView):
-    queryset = IncomeCategory.objects.all()
-    serializer_class = IncomeCategorySerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ExpenseCategoryListView(generics.ListAPIView):
+class ExpenseCategoryListView(BaseListAPIView):
     serializer_class = ExpenseCategorySerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class ExpenseCategoryCreateView(generics.CreateAPIView):
+class ExpenseCategoryCreateView(BaseCreateAPIView):
     queryset = ExpenseCategory.objects.all()
     serializer_class = ExpenseCategorySerializer
-    permission_classes = [IsAuthenticated]
 
 
-class ExpenseCategoryDetailView(generics.RetrieveAPIView):
+class ExpenseCategoryDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = ExpenseCategory.objects.all()
     serializer_class = ExpenseCategorySerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class ExpenseCategoryUpdateView(generics.UpdateAPIView):
-    queryset = ExpenseCategory.objects.all()
-    serializer_class = ExpenseCategorySerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ExpenseCategoryDeleteView(generics.DestroyAPIView):
-    queryset = ExpenseCategory.objects.all()
-    serializer_class = ExpenseCategorySerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class FinancialSourceListView(generics.ListAPIView):
+class FinancialSourceListView(BaseListAPIView):
     serializer_class = FinancialSourceSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class FinancialSourceCreateView(generics.CreateAPIView):
+class FinancialSourceCreateView(BaseCreateAPIView):
     queryset = FinancialSource.objects.all()
     serializer_class = FinancialSourceSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class FinancialSourceDetailView(generics.RetrieveAPIView):
+class FinancialSourceDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = FinancialSource.objects.all()
     serializer_class = FinancialSourceSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class FinancialSourceUpdateView(generics.UpdateAPIView):
-    queryset = FinancialSource.objects.all()
-    serializer_class = FinancialSourceSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class FinancialSourceDeleteView(generics.DestroyAPIView):
-    queryset = FinancialSource.objects.all()
-    serializer_class = FinancialSourceSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class IncomePlanListView(generics.ListAPIView):
+class IncomePlanListView(BaseListAPIView):
     serializer_class = IncomePlanSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class IncomePlanCreateView(generics.CreateAPIView):
+class IncomePlanCreateView(BaseCreateAPIView):
     queryset = IncomePlan.objects.all()
     serializer_class = IncomePlanSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class IncomePlanDetailView(generics.RetrieveAPIView):
+class IncomePlanDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = IncomePlan.objects.all()
     serializer_class = IncomePlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class IncomePlanUpdateView(generics.UpdateAPIView):
-    queryset = IncomePlan.objects.all()
-    serializer_class = IncomePlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class IncomePlanDeleteView(generics.DestroyAPIView):
-    queryset = IncomePlan.objects.all()
-    serializer_class = IncomePlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class IncomeListView(generics.ListAPIView):
+class IncomeListView(BaseListAPIView):
     serializer_class = IncomeSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class IncomeCreateView(generics.CreateAPIView):
+class IncomeCreateView(BaseCreateAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class IncomeDetailView(generics.RetrieveAPIView):
+class IncomeDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class IncomeUpdateView(generics.UpdateAPIView):
-    queryset = Income.objects.all()
-    serializer_class = IncomeSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class IncomeDeleteView(generics.DestroyAPIView):
-    queryset = Income.objects.all()
-    serializer_class = IncomeSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ExpensePlanListView(generics.ListAPIView):
+class ExpensePlanListView(BaseListAPIView):
     serializer_class = ExpensePlanSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class ExpensePlanCreateView(generics.CreateAPIView):
+class ExpensePlanCreateView(BaseCreateAPIView):
     queryset = ExpensePlan.objects.all()
     serializer_class = ExpensePlanSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class ExpensePlanDetailView(generics.RetrieveAPIView):
+class ExpensePlanDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = ExpensePlan.objects.all()
     serializer_class = ExpensePlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class ExpensePlanUpdateView(generics.UpdateAPIView):
-    queryset = ExpensePlan.objects.all()
-    serializer_class = ExpensePlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ExpensePlanDeleteView(generics.DestroyAPIView):
-    queryset = ExpensePlan.objects.all()
-    serializer_class = ExpensePlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ExpenseListView(generics.ListAPIView):
+class ExpenseListView(BaseListAPIView):
     serializer_class = ExpenseSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class ExpenseCreateView(generics.CreateAPIView):
+class ExpenseCreateView(BaseCreateAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class ExpenseDetailView(generics.RetrieveAPIView):
+class ExpenseDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class ExpenseUpdateView(generics.UpdateAPIView):
-    queryset = Expense.objects.all()
-    serializer_class = ExpenseSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ExpenseDeleteView(generics.DestroyAPIView):
-    queryset = Expense.objects.all()
-    serializer_class = ExpenseSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class InvestmentListView(generics.ListAPIView):
+class InvestmentListView(BaseListAPIView):
     serializer_class = InvestmentSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class InvestmentCreateView(generics.CreateAPIView):
+class InvestmentCreateView(BaseCreateAPIView):
     queryset = Investment.objects.all()
     serializer_class = InvestmentSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class InvestmentDetailView(generics.RetrieveAPIView):
+class InvestmentDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = Investment.objects.all()
     serializer_class = InvestmentSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class InvestmentUpdateView(generics.UpdateAPIView):
-    queryset = Investment.objects.all()
-    serializer_class = InvestmentSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class InvestmentDeleteView(generics.DestroyAPIView):
-    queryset = Investment.objects.all()
-    serializer_class = InvestmentSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class InvestmentPlanListView(generics.ListAPIView):
+class InvestmentPlanListView(BaseListAPIView):
     serializer_class = InvestmentPlanSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class InvestmentPlanCreateView(generics.CreateAPIView):
+class InvestmentPlanCreateView(BaseCreateAPIView):
     queryset = InvestmentPlan.objects.all()
     serializer_class = InvestmentPlanSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class InvestmentPlanDetailView(generics.RetrieveAPIView):
+class InvestmentPlanDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = InvestmentPlan.objects.all()
     serializer_class = InvestmentPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class InvestmentPlanUpdateView(generics.UpdateAPIView):
-    queryset = InvestmentPlan.objects.all()
-    serializer_class = InvestmentPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class InvestmentPlanDeleteView(generics.DestroyAPIView):
-    queryset = InvestmentPlan.objects.all()
-    serializer_class = InvestmentPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class DebtListView(generics.ListAPIView):
+class DebtListView(BaseListAPIView):
     serializer_class = DebtSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class DebtCreateView(generics.CreateAPIView):
+class DebtCreateView(BaseCreateAPIView):
     queryset = Debt.objects.all()
     serializer_class = DebtSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class DebtDetailView(generics.RetrieveAPIView):
+class DebtDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = Debt.objects.all()
     serializer_class = DebtSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class DebtUpdateView(generics.UpdateAPIView):
-    queryset = Debt.objects.all()
-    serializer_class = DebtSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class DebtDeleteView(generics.DestroyAPIView):
-    queryset = Debt.objects.all()
-    serializer_class = DebtSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class DebtPlanListView(generics.ListAPIView):
+class DebtPlanListView(BaseListAPIView):
     serializer_class = DebtPlanSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class DebtPlanCreateView(generics.CreateAPIView):
+class DebtPlanCreateView(BaseCreateAPIView):
     queryset = DebtPlan.objects.all()
     serializer_class = DebtPlanSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class DebtPlanDetailView(generics.RetrieveAPIView):
+class DebtPlanDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = DebtPlan.objects.all()
     serializer_class = DebtPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class DebtPlanUpdateView(generics.UpdateAPIView):
-    queryset = DebtPlan.objects.all()
-    serializer_class = DebtPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class DebtPlanDeleteView(generics.DestroyAPIView):
-    queryset = DebtPlan.objects.all()
-    serializer_class = DebtPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ClaimListView(generics.ListAPIView):
+class ClaimListView(BaseListAPIView):
     serializer_class = ClaimSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class ClaimCreateView(generics.CreateAPIView):
+class ClaimCreateView(BaseCreateAPIView):
     queryset = Claim.objects.all()
     serializer_class = ClaimSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class ClaimDetailView(generics.RetrieveAPIView):
+class ClaimDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = Claim.objects.all()
     serializer_class = ClaimSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class ClaimUpdateView(generics.UpdateAPIView):
-    queryset = Claim.objects.all()
-    serializer_class = ClaimSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ClaimDeleteView(generics.DestroyAPIView):
-    queryset = Claim.objects.all()
-    serializer_class = ClaimSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ClaimPlanListView(generics.ListAPIView):
+class ClaimPlanListView(BaseListAPIView):
     serializer_class = ClaimPlanSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class ClaimPlanCreateView(generics.CreateAPIView):
+class ClaimPlanCreateView(BaseCreateAPIView):
     queryset = ClaimPlan.objects.all()
     serializer_class = ClaimPlanSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class ClaimPlanDetailView(generics.RetrieveAPIView):
+class ClaimPlanDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = ClaimPlan.objects.all()
     serializer_class = ClaimPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class ClaimPlanUpdateView(generics.UpdateAPIView):
-    queryset = ClaimPlan.objects.all()
-    serializer_class = ClaimPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class ClaimPlanDeleteView(generics.DestroyAPIView):
-    queryset = ClaimPlan.objects.all()
-    serializer_class = ClaimPlanSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class BankAccountListView(generics.ListAPIView):
+class BankAccountListView(BaseListAPIView):
     serializer_class = BankAccountSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class BankAccountCreateView(generics.CreateAPIView):
+class BankAccountCreateView(BaseCreateAPIView):
     queryset = BankAccount.objects.all()
     serializer_class = BankAccountSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class BankAccountDetailView(generics.RetrieveAPIView):
+class BankAccountDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = BankAccount.objects.all()
     serializer_class = BankAccountSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
 
 
-class BankAccountUpdateView(generics.UpdateAPIView):
-    queryset = BankAccount.objects.all()
-    serializer_class = BankAccountSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class BankAccountDeleteView(generics.DestroyAPIView):
-    queryset = BankAccount.objects.all()
-    serializer_class = BankAccountSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class TransactionListView(generics.ListAPIView):
+class TransactionListView(BaseListAPIView):
     serializer_class = TransactionSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
 
 
-class TransactionCreateView(generics.CreateAPIView):
+class TransactionCreateView(BaseCreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class TransactionDetailView(generics.RetrieveAPIView):
+class TransactionDetailUpdateDeleteView(BaseRetrieveUpdateDestroyAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class TransactionUpdateView(generics.UpdateAPIView):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-
-
-class TransactionDeleteView(generics.DestroyAPIView):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
