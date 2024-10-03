@@ -260,7 +260,7 @@ class Investment(BaseModel):  # Investícia
     )
 
 
-class DebtPlan(models.Model):  # Plánovaný dlh
+class DebtPlan(BaseModel):  # Plánovaný dlh
     planned_expense = models.OneToOneField(ExpensePlan, on_delete=models.CASCADE)
     interest_rate = models.DecimalField(
         verbose_name=_("Planned Interest Rate"),
@@ -283,7 +283,7 @@ class DebtPlan(models.Model):  # Plánovaný dlh
     )
 
 
-class Debt(models.Model):  # Dlh
+class Debt(BaseModel):  # Dlh
     expense = models.OneToOneField(Expense, on_delete=models.CASCADE)
     interest_rate = models.DecimalField(
         verbose_name=_("Interest Rate"),
@@ -298,7 +298,7 @@ class Debt(models.Model):  # Dlh
     creditor = models.CharField(verbose_name=_("Creditor"), max_length=128, blank=True)
 
 
-class ClaimPlan(models.Model):  # Plánovaná pohľadávka
+class ClaimPlan(BaseModel):  # Plánovaná pohľadávka
     planned_income = models.OneToOneField(IncomePlan, on_delete=models.CASCADE)
     planned_interest_rate = models.DecimalField(
         verbose_name=_("Planned Interest Rate"),
@@ -321,7 +321,7 @@ class ClaimPlan(models.Model):  # Plánovaná pohľadávka
     )
 
 
-class Claim(models.Model):  # Pohľadávka
+class Claim(BaseModel):  # Pohľadávka
     income = models.OneToOneField(Income, on_delete=models.CASCADE)
     interest_rate = models.DecimalField(
         verbose_name=_("Interest Rate"),
