@@ -1,6 +1,6 @@
 # 💰 My Personal Finance Manager
 
-Welcome to **My Personal Finance Manager**! 🎉 This is a personal project I'm building to develop my skills in web development, financial data management, and app design. The idea is simple: I want to manage my income, expenses, and finances in one place. Right now, the app is still in development, but here’s what it will offer when it’s complete.
+Welcome to **My Personal Finance Manager**! 🎉 This is a personal project I'm building to develop my skills in web development, financial data management, and app design. The idea is simple: I want to manage my income, expenses, and finances in one place. Instead of relying on Google Sheets, this app will offer a more practical and efficient way to track my finances. Right now, the app is still in development, but here’s what it will offer when it’s complete.
 
 ## 🌟 Planned Features:
 - **💼 Income & Expense Tracking**: Easily log your income and expenses, categorize them, and track them over time.
