@@ -2,43 +2,8 @@ from rest_framework import generics
 from .permissions import IsOwner
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from django.contrib.auth.models import User
-from finance.models import (
-    Tag,
-    IncomeCategory,
-    ExpenseCategory,
-    FinancialSource,
-    IncomePlan,
-    Income,
-    ExpensePlan,
-    Expense,
-    Investment,
-    InvestmentPlan,
-    Debt,
-    DebtPlan,
-    Claim,
-    ClaimPlan,
-    BankAccount,
-    Transaction,
-)
-from .serializers import (
-    TagSerializer,
-    UserSerializer,
-    IncomeCategorySerializer,
-    ExpenseCategorySerializer,
-    FinancialSourceSerializer,
-    IncomeSerializer,
-    IncomePlanSerializer,
-    ExpenseSerializer,
-    ExpensePlanSerializer,
-    InvestmentSerializer,
-    InvestmentPlanSerializer,
-    DebtSerializer,
-    DebtPlanSerializer,
-    ClaimSerializer,
-    ClaimPlanSerializer,
-    BankAccountSerializer,
-    TransactionSerializer,
-)
+from finance.models import *
+from .serializers import *
 
 
 class UserListView(generics.ListAPIView):

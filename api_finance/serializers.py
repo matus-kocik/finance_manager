@@ -1,23 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from finance.models import (
-    Tag,
-    IncomeCategory,
-    ExpenseCategory,
-    FinancialSource,
-    IncomePlan,
-    Income,
-    ExpensePlan,
-    Expense,
-    InvestmentPlan,
-    Investment,
-    DebtPlan,
-    Debt,
-    ClaimPlan,
-    Claim,
-    BankAccount,
-    Transaction,
-)
+from finance.models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
