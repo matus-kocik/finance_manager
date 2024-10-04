@@ -329,4 +329,36 @@ pip-selfcheck.json
 .history
 .ionide
 
+# Node.js
+node_modules/
+dist/
+build/
+
+# Vite
+.vite/
+.vitepress/
+vite.config.js
+vite.config.ts
+
+# React and Webpack output
+*.cache/
+.cache-loader/
+.eslintcache
+
+# IDE configurations (ak používate iný editor, napríklad WebStorm)
+.idea/
+
+# TypeScript
+*.tsbuildinfo
+
+# TypeScript build output
+dist/
+build/
+out/
+
+# Ignorovať zostavené JavaScript súbory z TypeScript
+*.js
+*.js.map
+*.d.ts
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,django,venv,dotenv,visualstudiocode
