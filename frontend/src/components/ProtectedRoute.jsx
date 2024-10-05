@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import api from "../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
@@ -10,6 +11,7 @@ function ProtectedRoute({ children }) {
 
     useEffect(() => {
         auth().catch(() => setIsAuthorized(false))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const refreshToken = async () => {
@@ -53,5 +55,8 @@ function ProtectedRoute({ children }) {
 
     return isAuthorized ? children : <Navigate to="/login" />;
 }
+ProtectedRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 export default ProtectedRoute;
