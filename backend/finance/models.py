@@ -1,5 +1,4 @@
 from django.db import models
-from django_cryptography.fields import encrypt
 from django.utils.timezone import now
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -88,15 +87,13 @@ class IncomePlan(BaseModel):  # Plánovaný príjem
         blank=True,
         default=0,
     )
-    planned_hourly_rate = encrypt(
-        models.DecimalField(
+    planned_hourly_rate = models.DecimalField(
             verbose_name=_("Planned Hourly Rate"),
             max_digits=6,
             decimal_places=2,
             blank=True,
             default=0,
         )
-    )
     source = models.ForeignKey(
         FinancialSource, verbose_name=_("Source"), on_delete=models.CASCADE
     )
@@ -131,15 +128,13 @@ class Income(BaseModel):  # Príjem
         blank=True,
         default=0,
     )
-    hourly_rate = encrypt(
-        models.DecimalField(
+    hourly_rate = models.DecimalField(
             verbose_name=_("Hourly Rate"),
             max_digits=6,
             decimal_places=2,
             blank=True,
             default=0,
         )
-    )
     source = models.ForeignKey(
         FinancialSource, verbose_name=_("Source"), on_delete=models.CASCADE
     )
@@ -338,16 +333,14 @@ class Claim(BaseModel):  # Pohľadávka
 
 class BankAccount(BaseModel):  # Bankový účet
     bank_name = models.CharField(verbose_name=_("Bank Name"), max_length=64)
-    iban = encrypt(models.CharField(verbose_name=_("IBAN"), max_length=34))
-    balance = encrypt(
-        models.DecimalField(
+    iban = models.CharField(verbose_name=_("IBAN"), max_length=34)
+    balance = models.DecimalField(
             verbose_name=_("Balance"),
             max_digits=12,
             decimal_places=2,
             blank=True,
             default=0,
         )
-    )
     currency = models.CharField(verbose_name=_("Currency"), max_length=16, blank=True)
 
 
