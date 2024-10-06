@@ -4,8 +4,28 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from .views import *
+from django.urls import path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 
 urlpatterns = [
+    # Schéma (OpenAPI)
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    # Swagger UI
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    # Redoc UI
+    path(
+        "api/schema/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
     path("api/token/", TokenObtainPairView.as_view(), name="get_token"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/users/", UserListView.as_view(), name="user_list"),
@@ -74,7 +94,11 @@ urlpatterns = [
     ),
     path("api/incomes/", IncomeListView.as_view(), name="income_list"),
     path("api/incomes/create/", IncomeCreateView.as_view(), name="income_create"),
-    path("api/incomes/<int:pk>/", IncomeDetailUpdateDeleteView.as_view(), name="income_detail"),
+    path(
+        "api/incomes/<int:pk>/",
+        IncomeDetailUpdateDeleteView.as_view(),
+        name="income_detail",
+    ),
     path("api/expense-plans/", ExpensePlanListView.as_view(), name="expense_plan_list"),
     path(
         "api/expense-plans/create/",
@@ -88,7 +112,11 @@ urlpatterns = [
     ),
     path("api/expenses/", ExpenseListView.as_view(), name="expense_list"),
     path("api/expenses/create/", ExpenseCreateView.as_view(), name="expense_create"),
-    path("api/expenses/<int:pk>/", ExpenseDetailUpdateDeleteView.as_view(), name="expense_detail"),
+    path(
+        "api/expenses/<int:pk>/",
+        ExpenseDetailUpdateDeleteView.as_view(),
+        name="expense_detail",
+    ),
     path("api/investments/", InvestmentListView.as_view(), name="investment_list"),
     path(
         "api/investments/create/",
@@ -117,7 +145,9 @@ urlpatterns = [
     ),
     path("api/debts/", DebtListView.as_view(), name="debt_list"),
     path("api/debts/create/", DebtCreateView.as_view(), name="debt_create"),
-    path("api/debts/<int:pk>/", DebtDetailUpdateDeleteView.as_view(), name="debt_detail"),
+    path(
+        "api/debts/<int:pk>/", DebtDetailUpdateDeleteView.as_view(), name="debt_detail"
+    ),
     path("api/debt-plans/", DebtPlanListView.as_view(), name="debt_plan_list"),
     path(
         "api/debt-plans/create/", DebtPlanCreateView.as_view(), name="debt_plan_create"
@@ -129,7 +159,11 @@ urlpatterns = [
     ),
     path("api/claims/", ClaimListView.as_view(), name="claim_list"),
     path("api/claims/create/", ClaimCreateView.as_view(), name="claim_create"),
-    path("api/claims/<int:pk>/", ClaimDetailUpdateDeleteView.as_view(), name="claim_detail"),
+    path(
+        "api/claims/<int:pk>/",
+        ClaimDetailUpdateDeleteView.as_view(),
+        name="claim_detail",
+    ),
     path("api/claim-plans/", ClaimPlanListView.as_view(), name="claim_plan_list"),
     path(
         "api/claim-plans/create/",
